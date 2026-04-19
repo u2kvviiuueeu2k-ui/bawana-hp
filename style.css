@@ -467,6 +467,96 @@ img { display: block; max-width: 100%; }
   margin-top: 16px;
 }
 
+/* ===== CONTACT FORM ===== */
+.contact-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 56px 0 48px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.contact-divider::before,
+.contact-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.contact-form {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: left;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.form-group label {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.required {
+  color: var(--accent-red);
+  margin-left: 2px;
+}
+.form-group input,
+.form-group textarea {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  border-radius: 2px;
+  outline: none;
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #4a3a20;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-gold);
+}
+.form-error {
+  font-size: 0.78rem;
+  color: #e05a5a;
+  min-height: 1.2em;
+}
+.form-submit {
+  text-align: center;
+  margin-top: 8px;
+}
+.form-feedback {
+  margin-top: 24px;
+  padding: 16px 20px;
+  border-radius: 2px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.form-feedback--success {
+  background: rgba(200,137,10,0.12);
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+}
+.form-feedback--error {
+  background: rgba(139,26,26,0.15);
+  border: 1px solid var(--accent-red);
+  color: #e08080;
+}
+
 /* ===== FOOTER ===== */
 .site-footer {
   background: #060504;
@@ -568,6 +658,7 @@ img { display: block; max-width: 100%; }
 
   .review-grid { grid-template-columns: 1fr; }
   .menu-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
 
   .hero-btns { flex-direction: column; align-items: center; }
   .hero-btns .btn { width: 100%; max-width: 280px; justify-content: center; }

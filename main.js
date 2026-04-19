@@ -48,3 +48,66 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 fadeEls.forEach(el => observer.observe(el));
+
+// Contact form submission
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nameEl    = document.getElementById('contact-name');
+    const emailEl   = document.getElementById('contact-email');
+    const messageEl = document.getElementById('contact-message');
+    const submitBtn = document.getElementById('contact-submit');
+    const feedback  = document.getElementById('form-feedback');
+
+    // エラー表示をリセット
+    ['name', 'email', 'message'].forEach(f => {
+      document.getElementById('err-' + f).textContent = '';
+    });
+    feedback.hidden = true;
+    feedback.className = 'form-feedback';
+
+    // ローディング状態
+    submitBtn.disabled = true;
+    submitBtn.querySelector('.btn-text').hidden = true;
+    submitBtn.querySelector('.btn-loading').hidden = false;
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    nameEl.value,
+          email:   emailEl.value,
+          message: messageEl.value,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        feedback.textContent = data.message;
+        feedback.classList.add('form-feedback--success');
+        feedback.hidden = false;
+        contactForm.reset();
+      } else if (res.status === 400 && data.errors) {
+        // フィールドごとのエラー表示
+        Object.entries(data.errors).forEach(([field, msg]) => {
+          const el = document.getElementById('err-' + field);
+          if (el) el.textContent = msg;
+        });
+      } else {
+        throw new Error(data.error ?? '送信に失敗しました');
+      }
+    } catch (err) {
+      feedback.textContent = 'エラーが発生しました。お電話にてお問い合わせください。';
+      feedback.classList.add('form-feedback--error');
+      feedback.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.querySelector('.btn-text').hidden = false;
+      submitBtn.querySelector('.btn-loading').hidden = true;
+    }
+  });
+}
