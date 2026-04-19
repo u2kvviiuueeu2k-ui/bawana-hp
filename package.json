@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "インド料理バワナ 公式ウェブサイト",
   "private": true,
+  "type": "module",
   "engines": {
     "node": ">=18"
   },

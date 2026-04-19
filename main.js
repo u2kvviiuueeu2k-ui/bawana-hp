@@ -101,7 +101,8 @@ if (contactForm) {
         throw new Error(data.error ?? '送信に失敗しました');
       }
     } catch (err) {
-      feedback.textContent = 'エラーが発生しました。お電話にてお問い合わせください。';
+      // err.message には API の error フィールドが入っている（503 含む）
+      feedback.textContent = err.message || 'エラーが発生しました。お電話（042-312-1275）にてお問い合わせください。';
       feedback.classList.add('form-feedback--error');
       feedback.hidden = false;
     } finally {

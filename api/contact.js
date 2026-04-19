@@ -1,9 +1,6 @@
-// /api/contact — お問い合わせ受付エンドポイント
-//
-// 現状: MongoDB未接続のダミー実装。バリデーション・ログのみ動作。
-// 将来: connectToDatabase() のコメントを外すだけで MongoDB 保存に切り替わる。
+import { connectToDatabase } from '../lib/mongodb.js';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -16,7 +13,7 @@ export default function handler(req, res) {
 
   // バリデーション
   const errors = {};
-  if (!name || name.trim().length < 1) errors.name = 'お名前を入力してください';
+  if (!name || name.trim().length < 1)   errors.name    = 'お名前を入力してください';
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = '有効なメールアドレスを入力してください';
   if (!message || message.trim().length < 10) errors.message = 'メッセージを10文字以上で入力してください';
 
@@ -25,24 +22,27 @@ export default function handler(req, res) {
   }
 
   const entry = {
-    name: name.trim(),
-    email: email.trim(),
+    name:    name.trim(),
+    email:   email.trim(),
     message: message.trim(),
-    receivedAt: new Date().toISOString(),
+    createdAt: new Date(), // Date型で保存してMongoDBのDate indexが効くようにする
   };
 
-  // Vercel Functions ログに記録（管理画面 → Logs で確認可能）
-  console.log('[contact] received:', JSON.stringify(entry));
-
-  // --- MongoDB 追加時はここを有効にする ---
-  // const { db } = await connectToDatabase();
-  // await db.collection('contacts').insertOne(entry);
-  // ----------------------------------------
+  try {
+    const { db } = await connectToDatabase();
+    await db.collection('contacts').insertOne(entry);
+    console.log('[contact] saved to MongoDB:', entry.email);
+  } catch (err) {
+    // DB障害時は503を返し、フォーム送信者に電話を案内する
+    console.error('[contact] DB error:', err.message);
+    return res.status(503).json({
+      ok: false,
+      error: 'データベースへの保存に失敗しました。お電話（042-312-1275）にてお問い合わせください。',
+    });
+  }
 
   return res.status(200).json({
     ok: true,
     message: 'お問い合わせを受け付けました。近日中にご連絡いたします。',
-    // 開発確認用に受信内容をエコーバック（本番では削除してよい）
-    debug: entry,
   });
 }
