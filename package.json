@@ -1,0 +1,12 @@
+{
+  "name": "bawana-hp",
+  "version": "1.0.0",
+  "description": "インド料理バワナ 公式ウェブサイト",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mongodb": "^6.0.0"
+  }
+}

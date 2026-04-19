@@ -1,0 +1,14 @@
+# 環境変数（絶対にコミットしない）
+.env
+.env.local
+.env.*.local
+
+# 依存パッケージ
+node_modules/
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
