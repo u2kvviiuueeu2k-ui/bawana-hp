@@ -333,30 +333,60 @@
     }
     .about-body p:last-of-type { margin-bottom: 36px; }
 
-    .about-stats {
+    /* ── NUMBERS STRIP ── */
+    #numbers {
+      background: var(--ink);
+      padding: 72px 0;
+    }
+
+    .num-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 4px;
+      grid-template-columns: repeat(3, 1fr);
     }
-    .stat {
-      background: var(--cream);
-      border-radius: var(--r);
-      padding: 24px 20px;
+
+    .num-item {
       text-align: center;
+      padding: 16px 32px;
+      position: relative;
     }
-    .stat-num {
+    .num-item + .num-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; height: 80%;
+      width: 1px;
+      background: var(--on-border);
+    }
+
+    .num-figure {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .count {
       font-family: 'Playfair Display', serif;
-      font-size: 38px;
-      color: var(--red);
+      font-size: clamp(56px, 8vw, 96px);
+      color: var(--on-ink);
       line-height: 1;
-      margin-bottom: 6px;
+      letter-spacing: -0.02em;
     }
-    .stat-label {
-      font-size: 11px;
+
+    .num-unit {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(18px, 2.8vw, 30px);
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .num-label {
+      font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--muted);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--on-muted);
+      display: block;
     }
 
     /* ─────────────────────────────────────────
@@ -401,7 +431,14 @@
     .tab:hover:not(.on) { color: var(--on-ink); }
 
     .panel { display: none; }
-    .panel.on { display: block; }
+    .panel.on {
+      display: block;
+      animation: panelIn .35s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     .menu-list {
       border-top: 1px solid var(--on-border);
@@ -705,14 +742,42 @@
     }
 
     /* ─────────────────────────────────────────
-       REVEAL
+       REVEAL & ANIMATION
     ───────────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease;
+      transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.22,1,.36,1),
+                  transform .7s cubic-bezier(.22,1,.36,1);
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* hero name float */
+    .hero-name {
+      animation: floatY 6s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    /* hero line draw */
+    .hero-line {
+      width: 0;
+      transition: width .8s .4s cubic-bezier(.22,1,.36,1);
+    }
+    .hero-line.drawn { width: 48px; }
+
+    /* num-item counter reveal */
+    .num-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s cubic-bezier(.22,1,.36,1),
+                  transform .6s cubic-bezier(.22,1,.36,1);
+    }
+    .num-item.in { opacity: 1; transform: translateY(0); }
+    .num-item:nth-child(2) { transition-delay: .12s; }
+    .num-item:nth-child(3) { transition-delay: .24s; }
 
     /* ─────────────────────────────────────────
        RESPONSIVE
@@ -741,7 +806,9 @@
       .about-grid  { grid-template-columns: 1fr; gap: 48px; }
       .about-img   { order: -1; }
       .about-sticker { right: 0; bottom: -14px; }
-      .about-stats { grid-template-columns: 1fr 1fr; }
+      .num-grid { grid-template-columns: 1fr; }
+      .num-item + .num-item::before { display: none; }
+      .num-item + .num-item { border-top: 1px solid var(--on-border); }
 
       .menu-head   { flex-direction: column; align-items: flex-start; }
 
@@ -853,18 +920,37 @@
               何時間もかけて仕込むカレーソース——
               その一皿に、本物のスパイス文化が宿っています。
             </p>
-            <div class="about-stats reveal">
-              <div class="stat">
-                <div class="stat-num">690</div>
-                <div class="stat-label">円〜ランチ</div>
-              </div>
-              <div class="stat">
-                <div class="stat-num">23</div>
-                <div class="stat-label">時までテイクアウト</div>
-              </div>
-            </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ NUMBERS ══ -->
+    <section id="numbers">
+      <div class="wrap">
+        <div class="num-grid">
+          <div class="num-item">
+            <div class="num-figure">
+              <span class="count" data-target="690" data-decimal="0">690</span>
+              <span class="num-unit">円〜</span>
+            </div>
+            <span class="num-label">Lunch Set</span>
+          </div>
+          <div class="num-item">
+            <div class="num-figure">
+              <span class="count" data-target="4.5" data-decimal="1">4.5</span>
+              <span class="num-unit">★</span>
+            </div>
+            <span class="num-label">TrustYou Score</span>
+          </div>
+          <div class="num-item">
+            <div class="num-figure">
+              <span class="count" data-target="23" data-decimal="0">23</span>
+              <span class="num-unit">時</span>
+            </div>
+            <span class="num-label">Takeout Available</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1116,17 +1202,17 @@
   </footer>
 
   <script>
-    // header shadow on scroll
+    /* ── header shadow ── */
     const hdr = document.getElementById('hdr');
     addEventListener('scroll', () => hdr.classList.toggle('raised', scrollY > 10), { passive: true });
 
-    // mobile drawer
+    /* ── mobile drawer ── */
     const drawer = document.getElementById('drawer');
     document.getElementById('burger').addEventListener('click', () => drawer.classList.add('open'));
     document.getElementById('drawerX').addEventListener('click', closeDrawer);
     function closeDrawer() { drawer.classList.remove('open'); }
 
-    // menu tabs
+    /* ── menu tabs with fade ── */
     document.querySelectorAll('.tab').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
@@ -1136,12 +1222,67 @@
       });
     });
 
-    // scroll reveal
-    const io = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    /* ── scroll reveal (staggered) ── */
+    const revealIo = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const siblings = e.target.parentElement.querySelectorAll('.reveal');
+        siblings.forEach((el, i) => {
+          setTimeout(() => el.classList.add('in'), i * 80);
+        });
+        revealIo.unobserve(e.target);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => revealIo.observe(el));
+
+    /* ── number count-up ── */
+    function runCount(el) {
+      const target  = parseFloat(el.dataset.target);
+      const decimal = parseInt(el.dataset.decimal) || 0;
+      const dur     = 1600;
+      const t0      = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 4);
+        el.textContent = decimal ? (target * e).toFixed(decimal) : Math.floor(target * e);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+    const countIo = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        runCount(e.target);
+        countIo.unobserve(e.target);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.count').forEach(el => countIo.observe(el));
+
+    /* ── num-item reveal ── */
+    const numIo = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        document.querySelectorAll('.num-item').forEach(el => el.classList.add('in'));
+        numIo.disconnect();
+      });
+    }, { threshold: 0.2 });
+    const firstNum = document.querySelector('.num-item');
+    if (firstNum) numIo.observe(firstNum);
+
+    /* ── hero line draw on load ── */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.querySelector('.hero-line')?.classList.add('drawn');
+      }, 600);
+    });
+
+    /* ── hero parallax ── */
+    const heroPhoto = document.querySelector('.hero-right img');
+    if (heroPhoto) {
+      addEventListener('scroll', () => {
+        const y = Math.min(scrollY * 0.18, 90);
+        heroPhoto.style.transform = `translateY(${y}px)`;
+      }, { passive: true });
+    }
   </script>
 
 </body>
