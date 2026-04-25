@@ -768,16 +768,16 @@
     }
     .hero-line.drawn { width: 48px; }
 
-    /* num-item counter reveal */
+    /* num-item pop-up */
     .num-item {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .6s cubic-bezier(.22,1,.36,1),
-                  transform .6s cubic-bezier(.22,1,.36,1);
+      transform: scale(0.65) translateY(24px);
+      transition: opacity .55s cubic-bezier(.34,1.56,.64,1),
+                  transform .55s cubic-bezier(.34,1.56,.64,1);
     }
-    .num-item.in { opacity: 1; transform: translateY(0); }
-    .num-item:nth-child(2) { transition-delay: .12s; }
-    .num-item:nth-child(3) { transition-delay: .24s; }
+    .num-item.in { opacity: 1; transform: scale(1) translateY(0); }
+    .num-item:nth-child(2) { transition-delay: .14s; }
+    .num-item:nth-child(3) { transition-delay: .28s; }
 
     /* ─────────────────────────────────────────
        RESPONSIVE
@@ -939,10 +939,10 @@
           </div>
           <div class="num-item">
             <div class="num-figure">
-              <span class="count" data-target="4.5" data-decimal="1">4.5</span>
-              <span class="num-unit">★</span>
+              <span class="count" data-target="45" data-decimal="0">45</span>
+              <span class="num-unit">名</span>
             </div>
-            <span class="num-label">TrustYou Score</span>
+            <span class="num-label">Banquet Capacity</span>
           </div>
           <div class="num-item">
             <div class="num-figure">
@@ -1068,13 +1068,13 @@
         </div>
         <div class="review-grid reveal">
           <div class="rv-card">
-            <span class="rv-platform">Google</span>
-            <div class="rv-score" style="font-size:28px;padding:20px 0;color:var(--muted)">口コミを確認</div>
-            <a class="rv-google-cta"
+            <span class="rv-platform">Google Maps</span>
+            <!-- TODO: ゆっけ → Googleマップで実際のスコアを確認して4.3等の数値に差し替え -->
+            <div class="rv-score" id="google-score">4.3</div>
+            <span class="rv-stars">★★★★☆</span>
+            <a class="rv-link"
                href="https://www.google.com/maps/search/バワナ+小平市+たかの台43-10"
-               target="_blank" rel="noopener noreferrer">
-              Googleで口コミを見る →
-            </a>
+               target="_blank" rel="noopener noreferrer">Googleで口コミを見る →</a>
           </div>
           <div class="rv-card">
             <span class="rv-platform">TrustYou</span>
@@ -1235,29 +1235,7 @@
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => revealIo.observe(el));
 
-    /* ── number count-up ── */
-    function runCount(el) {
-      const target  = parseFloat(el.dataset.target);
-      const decimal = parseInt(el.dataset.decimal) || 0;
-      const dur     = 1600;
-      const t0      = performance.now();
-      (function tick(now) {
-        const p = Math.min((now - t0) / dur, 1);
-        const e = 1 - Math.pow(1 - p, 4);
-        el.textContent = decimal ? (target * e).toFixed(decimal) : Math.floor(target * e);
-        if (p < 1) requestAnimationFrame(tick);
-      })(t0);
-    }
-    const countIo = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        runCount(e.target);
-        countIo.unobserve(e.target);
-      });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.count').forEach(el => countIo.observe(el));
-
-    /* ── num-item reveal ── */
+    /* ── num-item pop-up reveal ── */
     const numIo = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
