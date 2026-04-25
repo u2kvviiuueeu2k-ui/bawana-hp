@@ -335,25 +335,25 @@
 
     .about-stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 4px;
     }
     .stat {
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 16px;
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 24px 20px;
       text-align: center;
     }
     .stat-num {
       font-family: 'Playfair Display', serif;
-      font-size: 32px;
+      font-size: 38px;
       color: var(--red);
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .stat-label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.1em;
       color: var(--muted);
@@ -418,16 +418,16 @@
     .menu-item:hover { border-color: var(--red); }
     .menu-item-left {}
     .menu-item-name {
-      font-family: 'Noto Serif JP', serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 16px;
-      font-weight: 600;
-      color: var(--on-ink);
-      margin-bottom: 5px;
+      font-weight: 700;
+      color: #f0ece4;
+      margin-bottom: 6px;
     }
     .menu-item-desc {
-      font-size: 12.5px;
-      color: var(--on-muted);
-      line-height: 1.6;
+      font-size: 13px;
+      color: #c0bace;
+      line-height: 1.65;
     }
     .menu-item-price {
       font-family: 'Playfair Display', serif;
@@ -471,20 +471,22 @@
     .review-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      overflow: hidden;
+      gap: 20px;
     }
 
     .rv-card {
-      background: var(--cream);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       padding: 48px 32px;
       text-align: center;
-      transition: background .2s;
+      box-shadow: 0 2px 20px rgba(28,24,48,.07);
+      transition: transform .2s, box-shadow .2s;
     }
-    .rv-card:hover { background: var(--cream-d); }
+    .rv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(28,24,48,.12);
+    }
 
     .rv-platform {
       font-size: 10px;
@@ -739,7 +741,7 @@
       .about-grid  { grid-template-columns: 1fr; gap: 48px; }
       .about-img   { order: -1; }
       .about-sticker { right: 0; bottom: -14px; }
-      .about-stats { grid-template-columns: 1fr 1fr 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
 
       .menu-head   { flex-direction: column; align-items: flex-start; }
 
@@ -853,16 +855,12 @@
             </p>
             <div class="about-stats reveal">
               <div class="stat">
-                <div class="stat-num">15</div>
-                <div class="stat-label">年の修行</div>
-              </div>
-              <div class="stat">
                 <div class="stat-num">690</div>
                 <div class="stat-label">円〜ランチ</div>
               </div>
               <div class="stat">
                 <div class="stat-num">23</div>
-                <div class="stat-label">時までTO</div>
+                <div class="stat-label">時までテイクアウト</div>
               </div>
             </div>
           </div>
