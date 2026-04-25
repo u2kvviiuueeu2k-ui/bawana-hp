@@ -8,6 +8,7 @@
   <meta property="og:title" content="インド料理 バワナ | 鷹の台の本格インド・ネパール料理">
   <meta property="og:description" content="本場インドで15年のシェフが贈る本物の味。東京都小平市鷹の台。ランチ690円〜">
   <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
@@ -17,24 +18,32 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ── TOKENS ── */
+    /* ── DESIGN TOKENS ── */
     :root {
-      --bg:          #12101e;
-      --bg-card:     #1c1a2e;
-      --bg-dark:     #0a0918;
-      --accent:      #d4a853;
-      --accent-dim:  #b8923f;
-      --sub:         #c24b3c;
-      --sub-dim:     #a83f33;
-      --text:        #f0ede6;
-      --muted:       #9b96a8;
-      --border:      #2a2740;
-      --r:           4px;
-      --max:         1080px;
+      /* light (default) */
+      --cream:    #f5f0e8;
+      --cream-d:  #ece6da;
+      --text:     #1c1830;
+      --muted:    #7a7390;
+      --red:      #c24b3c;
+      --red-d:    #a83f33;
+      --gold:     #c8890a;
+      --border:   #d8d0c4;
+
+      /* dark sections */
+      --ink:      #1c1830;
+      --ink-d:    #100e20;
+      --on-ink:   #f5f0e8;
+      --on-muted: #9b96a8;
+      --on-border:#2d2850;
+      --on-gold:  #d4a853;
+
+      --max: 1080px;
+      --r:   3px;
     }
 
     body {
-      background: var(--bg);
+      background: var(--cream);
       color: var(--text);
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 15px;
@@ -42,32 +51,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a   { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
 
     .wrap {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 28px;
-    }
-
-    /* ── SHARED TYPOGRAPHY ── */
-    .eyebrow {
-      font-family: 'Playfair Display', serif;
-      font-size: 10px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 14px;
-    }
-
-    .headline {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(22px, 3.5vw, 36px);
-      font-weight: 600;
-      line-height: 1.4;
-      margin-bottom: 28px;
+      padding: 0 32px;
     }
 
     /* ── BUTTONS ── */
@@ -75,80 +65,112 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 13px 30px;
+      padding: 14px 32px;
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       border: none;
       cursor: pointer;
       border-radius: var(--r);
-      transition: background 0.2s, transform 0.2s, border-color 0.2s, color 0.2s;
+      transition: background .2s, transform .2s, color .2s, border-color .2s;
+      white-space: nowrap;
     }
-    .btn-gold  { background: var(--accent); color: var(--bg-dark); }
-    .btn-gold:hover { background: var(--accent-dim); transform: translateY(-2px); }
-    .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(240,237,230,0.35); }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .btn-red   { background: var(--red);  color: #fff; }
+    .btn-red:hover { background: var(--red-d); transform: translateY(-2px); }
 
-    /* ─────────────────────────────────────────────
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--text);
+    }
+    .btn-outline-dark:hover { background: var(--text); color: var(--cream); transform: translateY(-2px); }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--on-ink);
+      border: 1.5px solid rgba(245,240,232,.4);
+    }
+    .btn-outline-light:hover { border-color: var(--on-ink); transform: translateY(-2px); }
+
+    /* ── EYEBROW ── */
+    .ey {
+      font-family: 'Playfair Display', serif;
+      font-size: 10px;
+      font-style: italic;
+      letter-spacing: 0.3em;
+      color: var(--red);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .ey-light { color: var(--on-gold); }
+
+    /* ── HEADLINE ── */
+    .hl {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 3.2vw, 34px);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    .hl-light { color: var(--on-ink); }
+
+    /* ─────────────────────────────────────────
        HEADER
-    ───────────────────────────────────────────── */
+    ───────────────────────────────────────── */
     #hdr {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 62px;
+      z-index: 300;
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 28px;
-      transition: background 0.35s ease, border-color 0.35s ease;
-      border-bottom: 1px solid transparent;
+      padding: 0 32px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s;
     }
-    #hdr.on {
-      background: rgba(18,16,30,0.94);
-      backdrop-filter: blur(14px);
-      border-color: var(--border);
-    }
+    #hdr.raised { box-shadow: 0 2px 16px rgba(28,24,48,.08); }
 
-    .logo { display: flex; flex-direction: column; line-height: 1; }
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
     .logo-en {
       font-family: 'Playfair Display', serif;
-      font-size: 21px;
-      color: var(--accent);
-      letter-spacing: 0.09em;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--red);
+      letter-spacing: 0.06em;
     }
     .logo-ja {
       font-family: 'Noto Serif JP', serif;
-      font-size: 8.5px;
-      letter-spacing: 0.28em;
+      font-size: 8px;
+      letter-spacing: 0.3em;
       color: var(--muted);
       margin-top: 3px;
     }
 
-    .nav-list {
-      display: flex;
-      gap: 32px;
-      align-items: center;
-      list-style: none;
-    }
-    .nav-list a {
+    .nav { display: flex; gap: 28px; align-items: center; list-style: none; }
+    .nav a {
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
-      transition: color 0.2s;
+      transition: color .2s;
     }
-    .nav-list a:hover { color: var(--accent); }
-    .nav-list .nav-cta {
+    .nav a:hover { color: var(--text); }
+    .nav .nav-cta {
       padding: 8px 20px;
-      background: var(--sub);
-      color: var(--text) !important;
+      background: var(--red);
+      color: #fff !important;
       border-radius: var(--r);
-      transition: background 0.2s;
+      transition: background .2s;
     }
-    .nav-list .nav-cta:hover { background: var(--sub-dim) !important; transform: none; }
+    .nav .nav-cta:hover { background: var(--red-d) !important; }
 
     /* hamburger */
     .burger {
@@ -156,399 +178,373 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      padding: 6px 4px;
       background: none;
       border: none;
+      padding: 4px;
     }
-    .burger span {
-      width: 24px; height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      display: block;
-    }
+    .burger span { width: 24px; height: 2px; background: var(--text); border-radius: 2px; display: block; }
 
-    /* mobile drawer */
+    /* drawer */
     .drawer {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(10,9,24,0.97);
-      z-index: 190;
+      background: var(--cream);
+      z-index: 290;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 44px;
+      gap: 40px;
     }
     .drawer.open { display: flex; }
-    .drawer-close {
+    .drawer-x {
       position: absolute;
-      top: 22px; right: 28px;
-      font-size: 26px;
+      top: 20px; right: 28px;
+      font-size: 24px;
       cursor: pointer;
       color: var(--muted);
-      transition: color 0.2s;
       background: none;
       border: none;
     }
-    .drawer-close:hover { color: var(--text); }
     .drawer a {
       font-family: 'Noto Serif JP', serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 600;
-      letter-spacing: 0.12em;
       color: var(--text);
-      transition: color 0.2s;
+      letter-spacing: .1em;
+      transition: color .2s;
     }
-    .drawer a:hover { color: var(--accent); }
+    .drawer a:hover { color: var(--red); }
 
-    /* ─────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       HERO  — split layout
+    ───────────────────────────────────────── */
     #hero {
-      height: 100dvh;
-      min-height: 580px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 100dvh;
+      padding-top: 60px; /* header offset */
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: var(--bg-dark);
-      background-image: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=75');
-      background-size: cover;
-      background-position: center;
-      transition: transform 7s ease;
-      transform: scale(1.06);
-    }
-    .hero-bg.ready { transform: scale(1); }
-
-    .hero-veil {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        160deg,
-        rgba(18,16,30,0.45) 0%,
-        rgba(18,16,30,0.65) 55%,
-        rgba(10,9,24,0.88) 100%
-      );
-    }
-
-    .hero-body {
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
-      padding: 0 24px;
-    }
-
-    .hero-en {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(58px, 11vw, 104px);
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 22px;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: up 0.85s 0.2s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .hero-main {
-      font-family: 'Noto Serif JP', serif;
-      font-size: clamp(17px, 2.8vw, 24px);
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--text);
-      margin-bottom: 10px;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: up 0.85s 0.4s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .hero-sub {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: rgba(240,237,230,0.5);
-      margin-bottom: 44px;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: up 0.85s 0.55s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: up 0.85s 0.7s cubic-bezier(.22,1,.36,1) forwards;
-    }
-
-    .hero-arrow {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+    .hero-left {
+      background: var(--cream);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      opacity: 0;
-      animation: up 1s 1.2s forwards, pulse 2.5s 2.2s infinite;
+      justify-content: center;
+      padding: 80px 56px 80px 32px;
     }
-    .hero-arrow span {
-      font-size: 9px;
-      letter-spacing: 0.25em;
-      color: var(--muted);
+    .hero-left .wrap-left { max-width: 520px; margin-left: auto; }
+
+    .hero-overline {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-    }
-    .hero-arrow-line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, transparent, var(--accent));
+      color: var(--muted);
+      margin-bottom: 20px;
+      display: block;
     }
 
-    @keyframes up   { to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(7px); }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(64px, 9vw, 120px);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--red);
+      line-height: 0.92;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
     }
 
-    /* ─────────────────────────────────────────────
+    .hero-tagline {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 600;
+      line-height: 1.55;
+      color: var(--text);
+      margin-bottom: 36px;
+    }
+
+    .hero-line {
+      width: 48px;
+      height: 2px;
+      background: var(--red);
+      margin-bottom: 36px;
+    }
+
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ─────────────────────────────────────────
        ABOUT
-    ───────────────────────────────────────────── */
+    ───────────────────────────────────────── */
     #about {
-      padding: 110px 0;
-      background: var(--bg);
+      background: var(--cream-d);
+      padding: 100px 0;
     }
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 72px;
+      gap: 80px;
       align-items: center;
     }
 
-    .about-body p {
-      color: var(--muted);
-      font-size: 14.5px;
-      line-height: 2;
-      margin-bottom: 36px;
+    .about-img {
+      position: relative;
     }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .feature {
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 22px 14px;
-      text-align: center;
-      transition: border-color 0.2s;
-    }
-    .feature:hover { border-color: var(--accent); }
-    .feature-icon { font-size: 26px; margin-bottom: 10px; }
-    .feature-name {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 5px;
-    }
-    .feature-desc {
-      font-size: 11.5px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .about-img { position: relative; }
     .about-img img {
       width: 100%;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 3/4;
       object-fit: cover;
       border-radius: var(--r);
-      filter: brightness(0.82);
     }
-    .about-tag {
+    .about-sticker {
       position: absolute;
-      bottom: -18px;
-      right: -18px;
-      background: var(--sub);
-      color: var(--text);
-      padding: 18px 20px;
+      bottom: -20px;
+      right: -20px;
+      background: var(--red);
+      color: #fff;
       font-family: 'Noto Serif JP', serif;
       font-size: 12px;
       font-weight: 600;
-      line-height: 1.6;
+      line-height: 1.7;
+      padding: 18px 22px;
       border-radius: var(--r);
-      max-width: 148px;
     }
 
-    /* ─────────────────────────────────────────────
-       MENU
-    ───────────────────────────────────────────── */
-    #menu {
-      padding: 110px 0;
-      background: var(--bg-card);
-    }
+    .about-body .hl { margin-bottom: 28px; }
 
-    .section-head {
+    .about-body p {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 2.1;
+      margin-bottom: 28px;
+    }
+    .about-body p:last-of-type { margin-bottom: 36px; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    .stat {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 16px;
       text-align: center;
-      margin-bottom: 52px;
     }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────
+       MENU  — dark section
+    ───────────────────────────────────────── */
+    #menu {
+      background: var(--ink);
+      padding: 100px 0;
+    }
+
+    .menu-head {
+      margin-bottom: 56px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .menu-head .hl { margin-bottom: 0; }
 
     .tabs {
       display: flex;
-      gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 44px;
+      gap: 2px;
+      background: rgba(255,255,255,.06);
+      border-radius: var(--r);
+      padding: 3px;
     }
-
     .tab {
-      padding: 9px 26px;
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
+      padding: 9px 22px;
+      font-size: 11.5px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
+      color: var(--on-muted);
+      background: none;
+      border: none;
+      border-radius: 2px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all .2s;
+      font-family: 'Noto Sans JP', sans-serif;
     }
-    .tab.on  { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
-    .tab:hover:not(.on) { border-color: var(--accent); color: var(--accent); }
+    .tab.on { background: var(--red); color: #fff; }
+    .tab:hover:not(.on) { color: var(--on-ink); }
 
     .panel { display: none; }
     .panel.on { display: block; }
 
-    .cards {
+    .menu-list {
+      border-top: 1px solid var(--on-border);
+    }
+    .menu-item {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
-      gap: 18px;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 24px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--on-border);
+      transition: border-color .2s;
     }
-
-    .card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 26px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
-
-    .card-name {
+    .menu-item:hover { border-color: var(--red); }
+    .menu-item-left {}
+    .menu-item-name {
       font-family: 'Noto Serif JP', serif;
-      font-size: 15.5px;
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 8px;
+      color: var(--on-ink);
+      margin-bottom: 5px;
     }
-    .card-desc {
+    .menu-item-desc {
       font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-bottom: 18px;
+      color: var(--on-muted);
+      line-height: 1.6;
     }
-    .card-price {
+    .menu-item-price {
       font-family: 'Playfair Display', serif;
       font-size: 22px;
-      color: var(--accent);
+      color: var(--on-gold);
+      white-space: nowrap;
+      text-align: right;
     }
-    .card-price small {
+    .menu-item-price small {
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 11px;
-      color: var(--muted);
+      color: var(--on-muted);
     }
 
     .panel-note {
-      margin-top: 28px;
-      padding: 14px 20px;
+      margin-top: 24px;
       font-size: 12px;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: var(--r);
-      text-align: center;
+      color: var(--on-muted);
+      border-left: 2px solid var(--red);
+      padding-left: 14px;
     }
 
-    /* ─────────────────────────────────────────────
+    /* ─────────────────────────────────────────
        REVIEW
-    ───────────────────────────────────────────── */
+    ───────────────────────────────────────── */
     #review {
-      padding: 110px 0;
-      background: var(--bg);
+      background: var(--cream);
+      padding: 100px 0;
+    }
+
+    .review-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .review-head .hl { margin-bottom: 8px; }
+    .review-lead {
+      font-size: 14px;
+      color: var(--muted);
     }
 
     .review-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .review-card {
-      background: var(--bg-card);
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
       border-radius: var(--r);
-      padding: 36px 24px;
-      text-align: center;
-      transition: border-color 0.2s;
+      overflow: hidden;
     }
-    .review-card:hover { border-color: var(--accent); }
+
+    .rv-card {
+      background: var(--cream);
+      padding: 48px 32px;
+      text-align: center;
+      transition: background .2s;
+    }
+    .rv-card:hover { background: var(--cream-d); }
 
     .rv-platform {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       display: block;
     }
     .rv-score {
       font-family: 'Playfair Display', serif;
-      font-size: 60px;
-      color: var(--accent);
+      font-size: 72px;
+      color: var(--red);
       line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .rv-stars {
-      font-size: 15px;
-      color: var(--accent);
-      margin-bottom: 16px;
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 3px;
       display: block;
-      letter-spacing: 2px;
+      margin-bottom: 20px;
     }
     .rv-link {
-      font-size: 11.5px;
+      font-size: 12px;
       color: var(--muted);
       text-decoration: underline;
-      transition: color 0.2s;
+      text-underline-offset: 3px;
+      transition: color .2s;
     }
-    .rv-link:hover { color: var(--accent); }
+    .rv-link:hover { color: var(--red); }
 
-    /* ─────────────────────────────────────────────
+    /* Google card (no score) */
+    .rv-google-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color .2s;
+    }
+    .rv-google-cta:hover { color: var(--red-d); }
+
+    /* ─────────────────────────────────────────
        ACCESS
-    ───────────────────────────────────────────── */
+    ───────────────────────────────────────── */
     #access {
-      padding: 110px 0;
-      background: var(--bg-card);
+      background: var(--cream-d);
+      padding: 100px 0;
     }
 
     .access-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 64px;
       align-items: start;
     }
 
@@ -563,93 +559,90 @@
       display: block;
     }
 
-    .info-row {
-      display: flex;
-      gap: 18px;
-      padding: 22px 0;
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .info-table tr {
       border-bottom: 1px solid var(--border);
     }
-    .info-row:last-child { border-bottom: none; }
-
-    .info-icon {
-      font-size: 17px;
-      flex-shrink: 0;
-      width: 24px;
-      text-align: center;
-      padding-top: 1px;
-    }
-    .info-label {
+    .info-table tr:first-child { border-top: 1px solid var(--border); }
+    .info-table th {
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 5px;
+      color: var(--red);
+      padding: 18px 16px 18px 0;
+      white-space: nowrap;
+      vertical-align: top;
+      width: 88px;
+      text-align: left;
     }
-    .info-main {
-      font-size: 14.5px;
+    .info-table td {
+      font-size: 14px;
       color: var(--text);
-      line-height: 1.6;
+      padding: 18px 0;
+      line-height: 1.65;
+      vertical-align: top;
     }
-    .info-sub {
+    .info-table td small {
+      display: block;
       font-size: 12px;
       color: var(--muted);
-      margin-top: 2px;
+      margin-top: 3px;
     }
+    .info-table td a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
 
-    /* ─────────────────────────────────────────────
-       RESERVE
-    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       RESERVE  — dark section
+    ───────────────────────────────────────── */
     #reserve {
-      padding: 110px 0;
-      background: var(--bg);
+      background: var(--ink);
+      padding: 100px 0;
       text-align: center;
     }
 
     .reserve-inner {
-      max-width: 580px;
+      max-width: 560px;
       margin: 0 auto;
     }
 
-    .reserve-inner .headline { margin-bottom: 18px; }
-
+    .reserve-inner .hl { margin-bottom: 16px; }
     .reserve-lead {
-      color: var(--muted);
       font-size: 14.5px;
+      color: var(--on-muted);
       line-height: 1.9;
       margin-bottom: 44px;
     }
-
     .reserve-btns {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
-
     .reserve-tags {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       justify-content: center;
       flex-wrap: wrap;
     }
     .tag {
       font-size: 11px;
-      color: var(--muted);
-      border: 1px solid var(--border);
+      color: var(--on-muted);
+      border: 1px solid var(--on-border);
       border-radius: 999px;
       padding: 4px 14px;
     }
 
-    /* ─────────────────────────────────────────────
+    /* ─────────────────────────────────────────
        FOOTER
-    ───────────────────────────────────────────── */
+    ───────────────────────────────────────── */
     footer {
-      background: var(--bg-dark);
-      border-top: 1px solid var(--border);
+      background: var(--ink-d);
       padding: 64px 0 32px;
+      border-top: 1px solid var(--on-border);
     }
 
     .ft-grid {
@@ -659,90 +652,112 @@
       margin-bottom: 48px;
     }
 
-    .ft-brand .ft-logo-en {
+    .ft-logo-en {
       font-family: 'Playfair Display', serif;
       font-size: 26px;
-      color: var(--accent);
-      letter-spacing: 0.09em;
+      font-style: italic;
+      color: var(--red);
       display: block;
       margin-bottom: 4px;
     }
-    .ft-brand .ft-logo-ja {
+    .ft-logo-ja {
       font-family: 'Noto Serif JP', serif;
       font-size: 9px;
-      letter-spacing: 0.26em;
-      color: var(--muted);
+      letter-spacing: 0.28em;
+      color: var(--on-muted);
       display: block;
       margin-bottom: 22px;
     }
-    .ft-brand address {
+    .ft-addr {
       font-style: normal;
       font-size: 13px;
-      color: var(--muted);
-      line-height: 1.85;
+      color: var(--on-muted);
+      line-height: 1.9;
     }
-    .ft-brand address a:hover { color: var(--text); }
+    .ft-addr a:hover { color: var(--on-ink); }
 
-    .ft-col-title {
+    .ft-col-ttl {
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--on-gold);
       margin-bottom: 18px;
       display: block;
     }
     .ft-links a {
       display: block;
       font-size: 13px;
-      color: var(--muted);
+      color: var(--on-muted);
       margin-bottom: 12px;
-      transition: color 0.2s;
+      transition: color .2s;
     }
-    .ft-links a:hover { color: var(--text); }
+    .ft-links a:hover { color: var(--on-ink); }
 
     .ft-bottom {
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--on-border);
       padding-top: 24px;
       text-align: center;
       font-size: 11.5px;
-      color: var(--muted);
+      color: var(--on-muted);
     }
 
-    /* ─────────────────────────────────────────────
-       SCROLL REVEAL
-    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       REVEAL
+    ───────────────────────────────────────── */
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ─────────────────────────────────────────────
-       RESPONSIVE ≤ 768px
-    ───────────────────────────────────────────── */
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-right {
+        height: 56vw;
+        min-height: 280px;
+      }
+      .hero-right img { height: 100%; }
+      .hero-left {
+        padding: 60px 32px;
+        order: 2;
+      }
+      .hero-left .wrap-left { max-width: 100%; margin: 0; }
+    }
+
     @media (max-width: 768px) {
-      .nav-list { display: none; }
-      .burger    { display: flex; }
+      .nav { display: none; }
+      .burger { display: flex; }
 
-      .about-grid  { grid-template-columns: 1fr; gap: 52px; }
+      .about-grid  { grid-template-columns: 1fr; gap: 48px; }
       .about-img   { order: -1; }
-      .about-tag   { right: 0; bottom: -14px; }
-      .features    { grid-template-columns: 1fr; }
+      .about-sticker { right: 0; bottom: -14px; }
+      .about-stats { grid-template-columns: 1fr 1fr 1fr; }
 
-      .review-grid { grid-template-columns: 1fr; }
+      .menu-head   { flex-direction: column; align-items: flex-start; }
+
+      .review-grid { grid-template-columns: 1fr; gap: 1px; }
+
       .access-grid { grid-template-columns: 1fr; gap: 36px; }
 
       .ft-grid { grid-template-columns: 1fr; gap: 36px; }
 
-      .hero-cta     { flex-direction: column; align-items: center; }
+      .hero-cta     { flex-direction: column; }
       .reserve-btns { flex-direction: column; align-items: center; }
     }
 
     @media (max-width: 480px) {
-      .wrap { padding: 0 18px; }
-      #hdr  { padding: 0 18px; }
+      .wrap   { padding: 0 20px; }
+      #hdr    { padding: 0 20px; }
+      .hero-left { padding: 48px 20px; }
+      .hero-name { font-size: clamp(52px, 14vw, 80px); }
     }
   </style>
 </head>
@@ -755,7 +770,7 @@
       <span class="logo-ja">インド料理 バワナ</span>
     </a>
     <nav>
-      <ul class="nav-list">
+      <ul class="nav">
         <li><a href="#menu">Menu</a></li>
         <li><a href="#access">Access</a></li>
         <li><a href="#reserve" class="nav-cta">予約する</a></li>
@@ -766,13 +781,13 @@
     </button>
   </header>
 
-  <!-- ══ MOBILE DRAWER ══ -->
-  <div class="drawer" id="drawer" role="dialog" aria-modal="true">
-    <button class="drawer-close" id="drawerClose" aria-label="閉じる">✕</button>
+  <!-- ══ DRAWER ══ -->
+  <div class="drawer" id="drawer">
+    <button class="drawer-x" id="drawerX" aria-label="閉じる">✕</button>
+    <a href="#about"   onclick="closeDrawer()">About</a>
     <a href="#menu"    onclick="closeDrawer()">Menu</a>
-    <a href="#review"  onclick="closeDrawer()">Reviews</a>
     <a href="#access"  onclick="closeDrawer()">Access</a>
-    <a href="#reserve" onclick="closeDrawer()" class="btn btn-gold">予約する</a>
+    <a href="#reserve" onclick="closeDrawer()" class="btn btn-red" style="padding:14px 40px">予約する</a>
   </div>
 
   <main>
@@ -780,20 +795,30 @@
     <!-- ══ HERO ══ -->
     <section id="top">
       <div id="hero">
-        <div class="hero-bg" id="heroBg"></div>
-        <div class="hero-veil"></div>
-        <div class="hero-body">
-          <p class="hero-en">Bhawana</p>
-          <p class="hero-main">本場インド15年のシェフが、鷹の台に。</p>
-          <p class="hero-sub">本格インド・ネパール料理 &ensp;|&ensp; 東京都小平市 鷹の台</p>
-          <div class="hero-cta">
-            <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer" class="btn btn-gold">予約する</a>
-            <a href="#menu" class="btn btn-ghost">メニューを見る</a>
+        <div class="hero-left">
+          <div class="wrap-left">
+            <span class="hero-overline">鷹の台 / 東京都小平市</span>
+            <h1 class="hero-name">Bhawana</h1>
+            <p class="hero-tagline">
+              本場インド15年のシェフが、<br>
+              鷹の台に。
+            </p>
+            <div class="hero-line"></div>
+            <div class="hero-cta">
+              <a href="https://www.hotpepper.jp/strJ001215557/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="btn btn-red">予約する</a>
+              <a href="#menu" class="btn btn-outline-dark">メニューを見る</a>
+            </div>
           </div>
         </div>
-        <div class="hero-arrow" aria-hidden="true">
-          <div class="hero-arrow-line"></div>
-          <span>scroll</span>
+
+        <div class="hero-right">
+          <img
+            src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1200&q=80"
+            alt="バワナの本格インド料理"
+            fetchpriority="high"
+          >
         </div>
       </div>
     </section>
@@ -802,9 +827,19 @@
     <section id="about">
       <div class="wrap">
         <div class="about-grid">
+
+          <div class="about-img reveal">
+            <img
+              src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=75"
+              alt="バワナのカレー"
+              loading="lazy"
+            >
+            <div class="about-sticker">テイクアウト<br>〜 23:00 対応</div>
+          </div>
+
           <div class="about-body">
-            <span class="eyebrow">Our Story</span>
-            <h2 class="headline">スパイスの国から、<br>鷹の台へ。</h2>
+            <span class="ey">Our Story</span>
+            <h2 class="hl">スパイスの国から、<br>鷹の台へ。</h2>
             <p>
               本場インドで15年のキャリアを積んだシェフが、
               小平市の静かな街・鷹の台に店を開いて長年。
@@ -812,94 +847,97 @@
               地元の人々に愛され続けるバワナの味があります。
             </p>
             <p>
-              タンドール窯で丁寧に焼き上げるナンと、
+              タンドール窯で丁寧に焼き上げるナン、
               何時間もかけて仕込むカレーソース——
               その一皿に、本物のスパイス文化が宿っています。
-              テイクアウトは夜23時まで対応。
             </p>
-            <div class="features">
-              <div class="feature reveal">
-                <div class="feature-icon">🌶</div>
-                <span class="feature-name">本格スパイス</span>
-                <p class="feature-desc">本場仕込みのスパイスで再現する本物の味</p>
+            <div class="about-stats reveal">
+              <div class="stat">
+                <div class="stat-num">15</div>
+                <div class="stat-label">年の修行</div>
               </div>
-              <div class="feature reveal">
-                <div class="feature-icon">👨‍🍳</div>
-                <span class="feature-name">職人の技</span>
-                <p class="feature-desc">インドで15年修行を積んだシェフが腕を振るう</p>
+              <div class="stat">
+                <div class="stat-num">690</div>
+                <div class="stat-label">円〜ランチ</div>
               </div>
-              <div class="feature reveal">
-                <div class="feature-icon">💴</div>
-                <span class="feature-name">気軽な価格</span>
-                <p class="feature-desc">ランチ690円〜。本物の味を日常に</p>
+              <div class="stat">
+                <div class="stat-num">23</div>
+                <div class="stat-label">時までTO</div>
               </div>
             </div>
           </div>
-          <div class="about-img reveal">
-            <img
-              src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=75"
-              alt="バワナの本格インド料理"
-              loading="lazy"
-            >
-            <div class="about-tag">テイクアウト<br>〜 23:00 対応</div>
-          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- ══ MENU ══ -->
+    <!-- ══ MENU  (dark) ══ -->
     <section id="menu">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Food &amp; Drink</span>
-          <h2 class="headline" style="margin-bottom:0">Menu</h2>
-        </div>
 
-        <div class="tabs">
-          <button class="tab on" data-tab="lunch">ランチ</button>
-          <button class="tab"    data-tab="dinner">ディナー</button>
-          <button class="tab"    data-tab="plan">コース・プラン</button>
+        <div class="menu-head">
+          <div>
+            <span class="ey ey-light">Food &amp; Drink</span>
+            <h2 class="hl hl-light" style="margin-bottom:0">Menu</h2>
+          </div>
+          <div class="tabs">
+            <button class="tab on" data-tab="lunch">ランチ</button>
+            <button class="tab"    data-tab="dinner">ディナー</button>
+            <button class="tab"    data-tab="plan">プラン</button>
+          </div>
         </div>
 
         <!-- LUNCH -->
         <div class="panel on" id="tab-lunch">
-          <div class="cards">
-            <div class="card reveal">
-              <div class="card-name">カレーランチセット</div>
-              <div class="card-desc">カレー1種 + ナンまたはライス + サラダ + スープ</div>
-              <div class="card-price">690<small>円〜</small></div>
+          <div class="menu-list">
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">カレーランチセット</div>
+                <div class="menu-item-desc">カレー1種 + ナンまたはライス + サラダ + スープ</div>
+              </div>
+              <div class="menu-item-price">690<small>円〜</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">学生スペシャルセット</div>
-              <div class="card-desc">学生証提示でご利用いただけるお得なランチセット</div>
-              <div class="card-price">990<small>円</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">学生スペシャルセット</div>
+                <div class="menu-item-desc">学生証提示でご利用いただけるお得なセット</div>
+              </div>
+              <div class="menu-item-price">990<small>円</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">ランチビュッフェ</div>
-              <div class="card-desc">カレー各種・ナン・ライス・サラダ食べ放題。開催日は店舗にご確認ください</div>
-              <div class="card-price" style="font-size:14px;"><small>詳細は店舗へ</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">ランチビュッフェ</div>
+                <div class="menu-item-desc">カレー各種・ナン・ライス食べ放題。開催日は店舗へご確認ください</div>
+              </div>
+              <div class="menu-item-price" style="font-size:14px"><small>詳細は店舗へ</small></div>
             </div>
           </div>
-          <p class="panel-note">ランチは10:30〜。カレーの種類・価格は当日メニューをご確認ください。英語メニューあり。</p>
+          <p class="panel-note">ランチは 10:30〜 。カレーの種類・価格は当日メニューをご確認ください。英語メニューあり。</p>
         </div>
 
         <!-- DINNER -->
         <div class="panel" id="tab-dinner">
-          <div class="cards">
-            <div class="card reveal">
-              <div class="card-name">カレー各種</div>
-              <div class="card-desc">バターチキン・マトン・野菜・シーフード等、豊富な種類からお選びいただけます</div>
-              <div class="card-price" style="font-size:14px;"><small>詳細は店舗メニューへ</small></div>
+          <div class="menu-list">
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">カレー各種</div>
+                <div class="menu-item-desc">バターチキン・マトン・野菜・シーフード等、豊富な種類からお選びいただけます</div>
+              </div>
+              <div class="menu-item-price" style="font-size:13px"><small>詳細は店舗メニューへ</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">タンドール料理</div>
-              <div class="card-desc">チキンティッカ・タンドールチキン・ナン各種。窯焼きのこだわり料理</div>
-              <div class="card-price" style="font-size:14px;"><small>詳細は店舗メニューへ</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">タンドール料理</div>
+                <div class="menu-item-desc">チキンティッカ・タンドールチキン・ナン各種。窯焼きのこだわり</div>
+              </div>
+              <div class="menu-item-price" style="font-size:13px"><small>詳細は店舗メニューへ</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">飲み放題</div>
-              <div class="card-desc">ソフトドリンク＆アルコール込みの飲み放題。グループにも最適</div>
-              <div class="card-price">1,000<small>円〜（60分）</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">飲み放題</div>
+                <div class="menu-item-desc">ソフトドリンク＆アルコール込み。グループ利用にも最適</div>
+              </div>
+              <div class="menu-item-price">1,000<small>円〜（60分）</small></div>
             </div>
           </div>
           <p class="panel-note">テイクアウト対応（〜23:00）。詳細なメニュー・価格は店頭またはお電話でご確認ください。</p>
@@ -907,56 +945,65 @@
 
         <!-- PLAN -->
         <div class="panel" id="tab-plan">
-          <div class="cards">
-            <div class="card reveal">
-              <div class="card-name">女子会プラン</div>
-              <div class="card-desc">食べ放題 + 飲み放題のオールインワンプラン。女子会・グループに最適</div>
-              <div class="card-price">2,980<small>円</small></div>
+          <div class="menu-list">
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">女子会プラン</div>
+                <div class="menu-item-desc">食べ放題 + 飲み放題のオールインワン。女子会・グループに最適</div>
+              </div>
+              <div class="menu-item-price">2,980<small>円</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">貸切 — 1F</div>
-              <div class="card-desc">1階フロア貸し切り。宴会・パーティー・会社の打ち上げに</div>
-              <div class="card-price" style="font-size:18px;">25<small>〜 45名</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">貸切 — 1F</div>
+                <div class="menu-item-desc">宴会・パーティー・会社の打ち上げに</div>
+              </div>
+              <div class="menu-item-price" style="font-size:18px">25<small>〜45名</small></div>
             </div>
-            <div class="card reveal">
-              <div class="card-name">貸切 — 2F</div>
-              <div class="card-desc">2階プライベートフロア。少人数から中規模の集まりまで</div>
-              <div class="card-price" style="font-size:18px;">10<small>名〜</small></div>
+            <div class="menu-item">
+              <div class="menu-item-left">
+                <div class="menu-item-name">貸切 — 2F</div>
+                <div class="menu-item-desc">プライベートフロア。少人数〜中規模の集まりまで</div>
+              </div>
+              <div class="menu-item-price" style="font-size:18px">10<small>名〜</small></div>
             </div>
           </div>
-          <p class="panel-note">貸切・宴会のご予約は、お電話（042-312-1275）またはホットペッパーよりお問い合わせください。</p>
+          <p class="panel-note">貸切・宴会のご予約はお電話（042-312-1275）またはホットペッパーよりお問い合わせください。</p>
         </div>
+
       </div>
     </section>
 
     <!-- ══ REVIEW ══ -->
     <section id="review">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Reviews</span>
-          <h2 class="headline" style="margin-bottom:0">お客様の評価</h2>
+        <div class="review-head reveal">
+          <span class="ey">Reviews</span>
+          <h2 class="hl">お客様の評価</h2>
+          <p class="review-lead">実際にご来店いただいたお客様の声</p>
         </div>
-        <div class="review-grid">
-          <div class="review-card reveal">
+        <div class="review-grid reveal">
+          <div class="rv-card">
+            <span class="rv-platform">Google</span>
+            <div class="rv-score" style="font-size:28px;padding:20px 0;color:var(--muted)">口コミを確認</div>
+            <a class="rv-google-cta"
+               href="https://www.google.com/maps/search/バワナ+小平市+たかの台43-10"
+               target="_blank" rel="noopener noreferrer">
+              Googleで口コミを見る →
+            </a>
+          </div>
+          <div class="rv-card">
             <span class="rv-platform">TrustYou</span>
             <div class="rv-score">4.5</div>
             <span class="rv-stars">★★★★★</span>
           </div>
-          <div class="review-card reveal">
+          <div class="rv-card">
             <span class="rv-platform">TripAdvisor</span>
             <div class="rv-score">4.0</div>
             <span class="rv-stars">★★★★☆</span>
             <a class="rv-link"
                href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html"
-               target="_blank" rel="noopener noreferrer">口コミを見る →</a>
-          </div>
-          <div class="review-card reveal">
-            <span class="rv-platform">食べログ</span>
-            <div class="rv-score">3.09</div>
-            <span class="rv-stars">★★★☆☆</span>
-            <a class="rv-link"
-               href="https://tabelog.com/tokyo/A1328/A132804/13161874/"
-               target="_blank" rel="noopener noreferrer">口コミを見る（23件）→</a>
+               target="_blank" rel="noopener noreferrer">口コミを見る（7件）→</a>
           </div>
         </div>
       </div>
@@ -976,70 +1023,52 @@
             </iframe>
           </div>
           <div>
-            <span class="eyebrow">Access</span>
-            <h2 class="headline">店舗情報</h2>
-            <div class="info-row reveal">
-              <span class="info-icon">📍</span>
-              <div>
-                <span class="info-label">住所</span>
-                <div class="info-main">〒187-0024<br>東京都小平市たかの台43-10</div>
-              </div>
-            </div>
-            <div class="info-row reveal">
-              <span class="info-icon">🚃</span>
-              <div>
-                <span class="info-label">最寄駅</span>
-                <div class="info-main">西武国分寺線 鷹の台駅 徒歩2分</div>
-                <div class="info-sub">西武多摩湖線 小川駅・新小平駅も利用可</div>
-              </div>
-            </div>
-            <div class="info-row reveal">
-              <span class="info-icon">🕐</span>
-              <div>
-                <span class="info-label">営業時間</span>
-                <div class="info-main">10:30 〜 23:30</div>
-                <div class="info-sub">料理・ドリンク L.O. 23:00</div>
-              </div>
-            </div>
-            <div class="info-row reveal">
-              <span class="info-icon">📅</span>
-              <div>
-                <span class="info-label">定休日</span>
-                <div class="info-main">不定休</div>
-                <div class="info-sub">年末年始（12/31夜・1/1・1/2）は営業</div>
-              </div>
-            </div>
-            <div class="info-row reveal">
-              <span class="info-icon">📞</span>
-              <div>
-                <span class="info-label">電話</span>
-                <div class="info-main">
-                  <a href="tel:042-312-1275" style="color:var(--accent)">042-312-1275</a>
-                </div>
-              </div>
-            </div>
+            <span class="ey">Access</span>
+            <h2 class="hl">店舗情報</h2>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <th>住所</th>
+                  <td>〒187-0024<br>東京都小平市たかの台43-10</td>
+                </tr>
+                <tr>
+                  <th>最寄駅</th>
+                  <td>西武国分寺線 鷹の台駅 徒歩2分<small>西武多摩湖線 小川駅・新小平駅も利用可</small></td>
+                </tr>
+                <tr>
+                  <th>営業時間</th>
+                  <td>10:30 〜 23:30<small>料理・ドリンク L.O. 23:00</small></td>
+                </tr>
+                <tr>
+                  <th>定休日</th>
+                  <td>不定休<small>年末年始（12/31夜・1/1・1/2）は営業</small></td>
+                </tr>
+                <tr>
+                  <th>電話</th>
+                  <td><a href="tel:042-312-1275">042-312-1275</a></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══ RESERVE ══ -->
+    <!-- ══ RESERVE  (dark) ══ -->
     <section id="reserve">
       <div class="wrap">
         <div class="reserve-inner">
-          <span class="eyebrow">Reservation</span>
-          <h2 class="headline">ご予約・お問い合わせ</h2>
+          <span class="ey ey-light">Reservation</span>
+          <h2 class="hl hl-light">ご予約・お問い合わせ</h2>
           <p class="reserve-lead">
             女子会・宴会・貸切など、様々なシーンに対応しています。<br>
-            ホットペッパーグルメからの予約、またはお電話にてお気軽にどうぞ。
+            ホットペッパーグルメ、またはお電話にてお気軽にどうぞ。
           </p>
           <div class="reserve-btns">
-            <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer" class="btn btn-gold">
-              ホットペッパーで予約
-            </a>
-            <a href="tel:042-312-1275" class="btn btn-ghost">
-              📞&ensp;042-312-1275
-            </a>
+            <a href="https://www.hotpepper.jp/strJ001215557/"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-red">ホットペッパーで予約</a>
+            <a href="tel:042-312-1275" class="btn btn-outline-light">📞&ensp;042-312-1275</a>
           </div>
           <div class="reserve-tags">
             <span class="tag">全席禁煙</span>
@@ -1057,10 +1086,10 @@
   <footer>
     <div class="wrap">
       <div class="ft-grid">
-        <div class="ft-brand">
+        <div>
           <span class="ft-logo-en">Bhawana</span>
           <span class="ft-logo-ja">インド料理 バワナ</span>
-          <address>
+          <address class="ft-addr">
             〒187-0024 東京都小平市たかの台43-10<br>
             TEL:&ensp;<a href="tel:042-312-1275">042-312-1275</a><br>
             営業時間：10:30〜23:30（L.O. 23:00）<br>
@@ -1068,16 +1097,16 @@
           </address>
         </div>
         <div>
-          <span class="ft-col-title">Reservation</span>
+          <span class="ft-col-ttl">Reservation</span>
           <div class="ft-links">
             <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer">ホットペッパーグルメ</a>
             <a href="tel:042-312-1275">電話予約</a>
           </div>
         </div>
         <div>
-          <span class="ft-col-title">Review Sites</span>
+          <span class="ft-col-ttl">Review Sites</span>
           <div class="ft-links">
-            <a href="https://tabelog.com/tokyo/A1328/A132804/13161874/" target="_blank" rel="noopener noreferrer">食べログ</a>
+            <a href="https://www.google.com/maps/search/バワナ+小平市+たかの台43-10" target="_blank" rel="noopener noreferrer">Google</a>
             <a href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html" target="_blank" rel="noopener noreferrer">TripAdvisor</a>
           </div>
         </div>
@@ -1089,20 +1118,14 @@
   </footer>
 
   <script>
-    // sticky header
+    // header shadow on scroll
     const hdr = document.getElementById('hdr');
-    addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 48), { passive: true });
-
-    // hero bg pan
-    const heroBg = document.getElementById('heroBg');
-    const tmp = new Image();
-    tmp.onload = () => heroBg.classList.add('ready');
-    tmp.src = 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=75';
+    addEventListener('scroll', () => hdr.classList.toggle('raised', scrollY > 10), { passive: true });
 
     // mobile drawer
     const drawer = document.getElementById('drawer');
     document.getElementById('burger').addEventListener('click', () => drawer.classList.add('open'));
-    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    document.getElementById('drawerX').addEventListener('click', closeDrawer);
     function closeDrawer() { drawer.classList.remove('open'); }
 
     // menu tabs
@@ -1116,9 +1139,10 @@
     });
 
     // scroll reveal
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.12 });
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+      { threshold: 0.1 }
+    );
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
 
