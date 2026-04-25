@@ -342,19 +342,21 @@
     .num-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
     .num-item {
       text-align: center;
-      padding: 16px 32px;
+      padding: 40px 32px;
       position: relative;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      transition: border-color .25s, background .25s;
     }
-    .num-item + .num-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 10%; height: 80%;
-      width: 1px;
-      background: var(--on-border);
+    .num-item:hover {
+      background: rgba(255,255,255,.08);
+      border-color: var(--red);
     }
 
     .num-figure {
@@ -807,8 +809,6 @@
       .about-img   { order: -1; }
       .about-sticker { right: 0; bottom: -14px; }
       .num-grid { grid-template-columns: 1fr; }
-      .num-item + .num-item::before { display: none; }
-      .num-item + .num-item { border-top: 1px solid var(--on-border); }
 
       .menu-head   { flex-direction: column; align-items: flex-start; }
 
