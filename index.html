@@ -4,347 +4,1123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>インド料理 バワナ | 鷹の台の本格インド・ネパール料理</title>
-  <meta name="description" content="東京都小平市鷹の台の本格インド・ネパール料理店バワナ。ランチ500円〜、食べ放題・飲み放題・貸切も対応。TEL: 042-312-1275">
+  <meta name="description" content="東京都小平市鷹の台の本格インド・ネパール料理店バワナ。本場インドで15年のシェフが贈る本物の味。ランチ690円〜、食べ放題・飲み放題・貸切も対応。TEL: 042-312-1275">
   <meta property="og:title" content="インド料理 バワナ | 鷹の台の本格インド・ネパール料理">
-  <meta property="og:description" content="東京都小平市鷹の台の本格インド・ネパール料理店。ランチ500円〜、食べ放題・飲み放題・貸切も対応。">
-  <meta property="og:type" content="restaurant">
+  <meta property="og:description" content="本場インドで15年のシェフが贈る本物の味。東京都小平市鷹の台。ランチ690円〜">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:          #12101e;
+      --bg-card:     #1c1a2e;
+      --bg-dark:     #0a0918;
+      --accent:      #d4a853;
+      --accent-dim:  #b8923f;
+      --sub:         #c24b3c;
+      --sub-dim:     #a83f33;
+      --text:        #f0ede6;
+      --muted:       #9b96a8;
+      --border:      #2a2740;
+      --r:           4px;
+      --max:         1080px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── SHARED TYPOGRAPHY ── */
+    .eyebrow {
+      font-family: 'Playfair Display', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .headline {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 28px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      border: none;
+      cursor: pointer;
+      border-radius: var(--r);
+      transition: background 0.2s, transform 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-gold  { background: var(--accent); color: var(--bg-dark); }
+    .btn-gold:hover { background: var(--accent-dim); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid rgba(240,237,230,0.35); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ─────────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────────── */
+    #hdr {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      transition: background 0.35s ease, border-color 0.35s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #hdr.on {
+      background: rgba(18,16,30,0.94);
+      backdrop-filter: blur(14px);
+      border-color: var(--border);
+    }
+
+    .logo { display: flex; flex-direction: column; line-height: 1; }
+    .logo-en {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px;
+      color: var(--accent);
+      letter-spacing: 0.09em;
+    }
+    .logo-ja {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 8.5px;
+      letter-spacing: 0.28em;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-list a {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-list a:hover { color: var(--accent); }
+    .nav-list .nav-cta {
+      padding: 8px 20px;
+      background: var(--sub);
+      color: var(--text) !important;
+      border-radius: var(--r);
+      transition: background 0.2s;
+    }
+    .nav-list .nav-cta:hover { background: var(--sub-dim) !important; transform: none; }
+
+    /* hamburger */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px 4px;
+      background: none;
+      border: none;
+    }
+    .burger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      display: block;
+    }
+
+    /* mobile drawer */
+    .drawer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,9,24,0.97);
+      z-index: 190;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+    }
+    .drawer.open { display: flex; }
+    .drawer-close {
+      position: absolute;
+      top: 22px; right: 28px;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s;
+      background: none;
+      border: none;
+    }
+    .drawer-close:hover { color: var(--text); }
+    .drawer a {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+    .drawer a:hover { color: var(--accent); }
+
+    /* ─────────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────────── */
+    #hero {
+      height: 100dvh;
+      min-height: 580px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-dark);
+      background-image: url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=75');
+      background-size: cover;
+      background-position: center;
+      transition: transform 7s ease;
+      transform: scale(1.06);
+    }
+    .hero-bg.ready { transform: scale(1); }
+
+    .hero-veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(18,16,30,0.45) 0%,
+        rgba(18,16,30,0.65) 55%,
+        rgba(10,9,24,0.88) 100%
+      );
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      padding: 0 24px;
+    }
+
+    .hero-en {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(58px, 11vw, 104px);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 22px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: up 0.85s 0.2s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .hero-main {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(17px, 2.8vw, 24px);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: up 0.85s 0.4s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .hero-sub {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(240,237,230,0.5);
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: up 0.85s 0.55s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: up 0.85s 0.7s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .hero-arrow {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: up 1s 1.2s forwards, pulse 2.5s 2.2s infinite;
+    }
+    .hero-arrow span {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .hero-arrow-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, transparent, var(--accent));
+    }
+
+    @keyframes up   { to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ─────────────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────────────── */
+    #about {
+      padding: 110px 0;
+      background: var(--bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-body p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 2;
+      margin-bottom: 36px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 14px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .feature:hover { border-color: var(--accent); }
+    .feature-icon { font-size: 26px; margin-bottom: 10px; }
+    .feature-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 5px;
+    }
+    .feature-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .about-img { position: relative; }
+    .about-img img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: var(--r);
+      filter: brightness(0.82);
+    }
+    .about-tag {
+      position: absolute;
+      bottom: -18px;
+      right: -18px;
+      background: var(--sub);
+      color: var(--text);
+      padding: 18px 20px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+      border-radius: var(--r);
+      max-width: 148px;
+    }
+
+    /* ─────────────────────────────────────────────
+       MENU
+    ───────────────────────────────────────────── */
+    #menu {
+      padding: 110px 0;
+      background: var(--bg-card);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .tab {
+      padding: 9px 26px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab.on  { background: var(--accent); color: var(--bg-dark); border-color: var(--accent); }
+    .tab:hover:not(.on) { border-color: var(--accent); color: var(--accent); }
+
+    .panel { display: none; }
+    .panel.on { display: block; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 26px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .card-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 15.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--accent);
+    }
+    .card-price small {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .panel-note {
+      margin-top: 28px;
+      padding: 14px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: var(--r);
+      text-align: center;
+    }
+
+    /* ─────────────────────────────────────────────
+       REVIEW
+    ───────────────────────────────────────────── */
+    #review {
+      padding: 110px 0;
+      background: var(--bg);
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 36px 24px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .review-card:hover { border-color: var(--accent); }
+
+    .rv-platform {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .rv-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 60px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .rv-stars {
+      font-size: 15px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+      letter-spacing: 2px;
+    }
+    .rv-link {
+      font-size: 11.5px;
+      color: var(--muted);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .rv-link:hover { color: var(--accent); }
+
+    /* ─────────────────────────────────────────────
+       ACCESS
+    ───────────────────────────────────────────── */
+    #access {
+      padding: 110px 0;
+      background: var(--bg-card);
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .map-wrap {
+      border-radius: var(--r);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 420px;
+      display: block;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 18px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+
+    .info-icon {
+      font-size: 17px;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+      padding-top: 1px;
+    }
+    .info-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 5px;
+    }
+    .info-main {
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .info-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESERVE
+    ───────────────────────────────────────────── */
+    #reserve {
+      padding: 110px 0;
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .reserve-inner {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .reserve-inner .headline { margin-bottom: 18px; }
+
+    .reserve-lead {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.9;
+      margin-bottom: 44px;
+    }
+
+    .reserve-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .reserve-tags {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 14px;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 32px;
+    }
+
+    .ft-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .ft-brand .ft-logo-en {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--accent);
+      letter-spacing: 0.09em;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .ft-brand .ft-logo-ja {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 22px;
+    }
+    .ft-brand address {
+      font-style: normal;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+    .ft-brand address a:hover { color: var(--text); }
+
+    .ft-col-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+      display: block;
+    }
+    .ft-links a {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+      transition: color 0.2s;
+    }
+    .ft-links a:hover { color: var(--text); }
+
+    .ft-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--muted);
+    }
+
+    /* ─────────────────────────────────────────────
+       SCROLL REVEAL
+    ───────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE ≤ 768px
+    ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-list { display: none; }
+      .burger    { display: flex; }
+
+      .about-grid  { grid-template-columns: 1fr; gap: 52px; }
+      .about-img   { order: -1; }
+      .about-tag   { right: 0; bottom: -14px; }
+      .features    { grid-template-columns: 1fr; }
+
+      .review-grid { grid-template-columns: 1fr; }
+      .access-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .ft-grid { grid-template-columns: 1fr; gap: 36px; }
+
+      .hero-cta     { flex-direction: column; align-items: center; }
+      .reserve-btns { flex-direction: column; align-items: center; }
+    }
+
+    @media (max-width: 480px) {
+      .wrap { padding: 0 18px; }
+      #hdr  { padding: 0 18px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ========== HEADER ========== -->
-  <header class="site-header" id="site-header">
-    <div class="header-inner">
-      <a href="#top" class="logo">
-        <span class="logo-en">Bhawana</span>
-        <span class="logo-ja">バワナ</span>
-      </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="site-nav" id="site-nav">
-        <a href="#top">TOP</a>
-        <a href="#menu">MENU</a>
-        <a href="#access">ACCESS</a>
-        <a href="#reserve">RESERVE</a>
-      </nav>
-    </div>
+  <!-- ══ HEADER ══ -->
+  <header id="hdr">
+    <a href="#top" class="logo">
+      <span class="logo-en">Bhawana</span>
+      <span class="logo-ja">インド料理 バワナ</span>
+    </a>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#access">Access</a></li>
+        <li><a href="#reserve" class="nav-cta">予約する</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero" id="top">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <p class="hero-sub">本格インド・ネパール料理</p>
-      <h1 class="hero-title">BHAWANA</h1>
-      <p class="hero-tagline">鷹の台の小さな、本物の味。</p>
-      <div class="hero-btns">
-        <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener" class="btn btn-primary">予約する</a>
-        <a href="#menu" class="btn btn-outline">メニューを見る</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <span>SCROLL</span>
-      <div class="hero-scroll-line"></div>
-    </div>
-  </section>
+  <!-- ══ MOBILE DRAWER ══ -->
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true">
+    <button class="drawer-close" id="drawerClose" aria-label="閉じる">✕</button>
+    <a href="#menu"    onclick="closeDrawer()">Menu</a>
+    <a href="#review"  onclick="closeDrawer()">Reviews</a>
+    <a href="#access"  onclick="closeDrawer()">Access</a>
+    <a href="#reserve" onclick="closeDrawer()" class="btn btn-gold">予約する</a>
+  </div>
 
-  <!-- ========== ABOUT ========== -->
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="section-label">ABOUT</div>
-      <h2 class="section-title">スパイスの国から、鷹の台へ。</h2>
-      <p class="about-desc">
-        本場の味をそのままに、<br>
-        地元に愛される一軒として。
-      </p>
-      <div class="about-features">
-        <div class="feature-card">
-          <div class="feature-icon">🌶</div>
-          <h3>本格スパイス</h3>
-          <p>インド・ネパールから厳選したスパイスを使用。本場の風味をそのままお届けします。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">👨‍🍳</div>
-          <h3>職人の技</h3>
-          <p>タンドール窯で焼き上げるナンとチキン。熟練の料理人が一皿一皿丁寧に仕上げます。</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💰</div>
-          <h3>リーズナブル</h3>
-          <p>ランチ500円〜、ディナー1,000円〜。本格インド料理を日常的に楽しめる価格帯。</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
 
-  <!-- ========== MENU ========== -->
-  <section class="menu-section section" id="menu">
-    <div class="container">
-      <div class="section-label">MENU</div>
-      <h2 class="section-title">メニュー</h2>
-      <div class="menu-tabs">
-        <button class="tab-btn active" data-tab="lunch">LUNCH</button>
-        <button class="tab-btn" data-tab="dinner">DINNER</button>
+    <!-- ══ HERO ══ -->
+    <section id="top">
+      <div id="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-veil"></div>
+        <div class="hero-body">
+          <p class="hero-en">Bhawana</p>
+          <p class="hero-main">本場インド15年のシェフが、鷹の台に。</p>
+          <p class="hero-sub">本格インド・ネパール料理 &ensp;|&ensp; 東京都小平市 鷹の台</p>
+          <div class="hero-cta">
+            <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer" class="btn btn-gold">予約する</a>
+            <a href="#menu" class="btn btn-ghost">メニューを見る</a>
+          </div>
+        </div>
+        <div class="hero-arrow" aria-hidden="true">
+          <div class="hero-arrow-line"></div>
+          <span>scroll</span>
+        </div>
       </div>
+    </section>
 
-      <div class="tab-content active" id="tab-lunch">
-        <p class="menu-price-note">ランチ ¥500〜¥1,000</p>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>カレーランチセット</h3>
-              <p>選べるカレーにナンまたはライス付き。サラダ・スープ付きの充実セット。</p>
-              <span class="menu-price">¥[要確認]〜</span>
+    <!-- ══ ABOUT ══ -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="about-body">
+            <span class="eyebrow">Our Story</span>
+            <h2 class="headline">スパイスの国から、<br>鷹の台へ。</h2>
+            <p>
+              本場インドで15年のキャリアを積んだシェフが、
+              小平市の静かな街・鷹の台に店を開いて長年。
+              インド・ネパールの伝統的なレシピをそのままに、
+              地元の人々に愛され続けるバワナの味があります。
+            </p>
+            <p>
+              タンドール窯で丁寧に焼き上げるナンと、
+              何時間もかけて仕込むカレーソース——
+              その一皿に、本物のスパイス文化が宿っています。
+              テイクアウトは夜23時まで対応。
+            </p>
+            <div class="features">
+              <div class="feature reveal">
+                <div class="feature-icon">🌶</div>
+                <span class="feature-name">本格スパイス</span>
+                <p class="feature-desc">本場仕込みのスパイスで再現する本物の味</p>
+              </div>
+              <div class="feature reveal">
+                <div class="feature-icon">👨‍🍳</div>
+                <span class="feature-name">職人の技</span>
+                <p class="feature-desc">インドで15年修行を積んだシェフが腕を振るう</p>
+              </div>
+              <div class="feature reveal">
+                <div class="feature-icon">💴</div>
+                <span class="feature-name">気軽な価格</span>
+                <p class="feature-desc">ランチ690円〜。本物の味を日常に</p>
+              </div>
             </div>
           </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>ランチビュッフェ</h3>
-              <p>カレー・タンドール・サラダなど豊富なラインナップを食べ放題でお楽しみください。</p>
-              <span class="menu-price">¥[要確認]〜</span>
+          <div class="about-img reveal">
+            <img
+              src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=75"
+              alt="バワナの本格インド料理"
+              loading="lazy"
+            >
+            <div class="about-tag">テイクアウト<br>〜 23:00 対応</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ MENU ══ -->
+    <section id="menu">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Food &amp; Drink</span>
+          <h2 class="headline" style="margin-bottom:0">Menu</h2>
+        </div>
+
+        <div class="tabs">
+          <button class="tab on" data-tab="lunch">ランチ</button>
+          <button class="tab"    data-tab="dinner">ディナー</button>
+          <button class="tab"    data-tab="plan">コース・プラン</button>
+        </div>
+
+        <!-- LUNCH -->
+        <div class="panel on" id="tab-lunch">
+          <div class="cards">
+            <div class="card reveal">
+              <div class="card-name">カレーランチセット</div>
+              <div class="card-desc">カレー1種 + ナンまたはライス + サラダ + スープ</div>
+              <div class="card-price">690<small>円〜</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">学生スペシャルセット</div>
+              <div class="card-desc">学生証提示でご利用いただけるお得なランチセット</div>
+              <div class="card-price">990<small>円</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">ランチビュッフェ</div>
+              <div class="card-desc">カレー各種・ナン・ライス・サラダ食べ放題。開催日は店舗にご確認ください</div>
+              <div class="card-price" style="font-size:14px;"><small>詳細は店舗へ</small></div>
             </div>
           </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>バターチキンカレー</h3>
-              <p>まろやかなバターとトマトの優しい風味。辛さ調整可能。</p>
-              <span class="menu-price">¥[要確認]〜</span>
+          <p class="panel-note">ランチは10:30〜。カレーの種類・価格は当日メニューをご確認ください。英語メニューあり。</p>
+        </div>
+
+        <!-- DINNER -->
+        <div class="panel" id="tab-dinner">
+          <div class="cards">
+            <div class="card reveal">
+              <div class="card-name">カレー各種</div>
+              <div class="card-desc">バターチキン・マトン・野菜・シーフード等、豊富な種類からお選びいただけます</div>
+              <div class="card-price" style="font-size:14px;"><small>詳細は店舗メニューへ</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">タンドール料理</div>
+              <div class="card-desc">チキンティッカ・タンドールチキン・ナン各種。窯焼きのこだわり料理</div>
+              <div class="card-price" style="font-size:14px;"><small>詳細は店舗メニューへ</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">飲み放題</div>
+              <div class="card-desc">ソフトドリンク＆アルコール込みの飲み放題。グループにも最適</div>
+              <div class="card-price">1,000<small>円〜（60分）</small></div>
             </div>
           </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>チーズナン</h3>
-              <p>タンドール窯で焼き上げたもちもちナン。とろけるチーズが絶品。</p>
-              <span class="menu-price">¥[要確認]〜</span>
+          <p class="panel-note">テイクアウト対応（〜23:00）。詳細なメニュー・価格は店頭またはお電話でご確認ください。</p>
+        </div>
+
+        <!-- PLAN -->
+        <div class="panel" id="tab-plan">
+          <div class="cards">
+            <div class="card reveal">
+              <div class="card-name">女子会プラン</div>
+              <div class="card-desc">食べ放題 + 飲み放題のオールインワンプラン。女子会・グループに最適</div>
+              <div class="card-price">2,980<small>円</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">貸切 — 1F</div>
+              <div class="card-desc">1階フロア貸し切り。宴会・パーティー・会社の打ち上げに</div>
+              <div class="card-price" style="font-size:18px;">25<small>〜 45名</small></div>
+            </div>
+            <div class="card reveal">
+              <div class="card-name">貸切 — 2F</div>
+              <div class="card-desc">2階プライベートフロア。少人数から中規模の集まりまで</div>
+              <div class="card-price" style="font-size:18px;">10<small>名〜</small></div>
+            </div>
+          </div>
+          <p class="panel-note">貸切・宴会のご予約は、お電話（042-312-1275）またはホットペッパーよりお問い合わせください。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ REVIEW ══ -->
+    <section id="review">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Reviews</span>
+          <h2 class="headline" style="margin-bottom:0">お客様の評価</h2>
+        </div>
+        <div class="review-grid">
+          <div class="review-card reveal">
+            <span class="rv-platform">TrustYou</span>
+            <div class="rv-score">4.5</div>
+            <span class="rv-stars">★★★★★</span>
+          </div>
+          <div class="review-card reveal">
+            <span class="rv-platform">TripAdvisor</span>
+            <div class="rv-score">4.0</div>
+            <span class="rv-stars">★★★★☆</span>
+            <a class="rv-link"
+               href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html"
+               target="_blank" rel="noopener noreferrer">口コミを見る →</a>
+          </div>
+          <div class="review-card reveal">
+            <span class="rv-platform">食べログ</span>
+            <div class="rv-score">3.09</div>
+            <span class="rv-stars">★★★☆☆</span>
+            <a class="rv-link"
+               href="https://tabelog.com/tokyo/A1328/A132804/13161874/"
+               target="_blank" rel="noopener noreferrer">口コミを見る（23件）→</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ACCESS ══ -->
+    <section id="access">
+      <div class="wrap">
+        <div class="access-grid">
+          <div class="map-wrap reveal">
+            <iframe
+              src="https://maps.google.com/maps?q=35.72239,139.46098&z=16&output=embed&hl=ja"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="インド料理バワナの地図">
+            </iframe>
+          </div>
+          <div>
+            <span class="eyebrow">Access</span>
+            <h2 class="headline">店舗情報</h2>
+            <div class="info-row reveal">
+              <span class="info-icon">📍</span>
+              <div>
+                <span class="info-label">住所</span>
+                <div class="info-main">〒187-0024<br>東京都小平市たかの台43-10</div>
+              </div>
+            </div>
+            <div class="info-row reveal">
+              <span class="info-icon">🚃</span>
+              <div>
+                <span class="info-label">最寄駅</span>
+                <div class="info-main">西武国分寺線 鷹の台駅 徒歩2分</div>
+                <div class="info-sub">西武多摩湖線 小川駅・新小平駅も利用可</div>
+              </div>
+            </div>
+            <div class="info-row reveal">
+              <span class="info-icon">🕐</span>
+              <div>
+                <span class="info-label">営業時間</span>
+                <div class="info-main">10:30 〜 23:30</div>
+                <div class="info-sub">料理・ドリンク L.O. 23:00</div>
+              </div>
+            </div>
+            <div class="info-row reveal">
+              <span class="info-icon">📅</span>
+              <div>
+                <span class="info-label">定休日</span>
+                <div class="info-main">不定休</div>
+                <div class="info-sub">年末年始（12/31夜・1/1・1/2）は営業</div>
+              </div>
+            </div>
+            <div class="info-row reveal">
+              <span class="info-icon">📞</span>
+              <div>
+                <span class="info-label">電話</span>
+                <div class="info-main">
+                  <a href="tel:042-312-1275" style="color:var(--accent)">042-312-1275</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="tab-content" id="tab-dinner">
-        <p class="menu-price-note">ディナー ¥1,000〜¥1,500</p>
-        <div class="menu-grid">
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>カレー各種</h3>
-              <p>バターチキン・マトン・野菜・シーフードなど豊富なラインナップ。</p>
-              <span class="menu-price">¥[要確認]〜</span>
-            </div>
+    <!-- ══ RESERVE ══ -->
+    <section id="reserve">
+      <div class="wrap">
+        <div class="reserve-inner">
+          <span class="eyebrow">Reservation</span>
+          <h2 class="headline">ご予約・お問い合わせ</h2>
+          <p class="reserve-lead">
+            女子会・宴会・貸切など、様々なシーンに対応しています。<br>
+            ホットペッパーグルメからの予約、またはお電話にてお気軽にどうぞ。
+          </p>
+          <div class="reserve-btns">
+            <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer" class="btn btn-gold">
+              ホットペッパーで予約
+            </a>
+            <a href="tel:042-312-1275" class="btn btn-ghost">
+              📞&ensp;042-312-1275
+            </a>
           </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>タンドール料理</h3>
-              <p>チキンティッカ・シークカバブなど本格タンドール窯料理。</p>
-              <span class="menu-price">¥[要確認]〜</span>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>飲み放題コース</h3>
-              <p>生ビール・カクテル・ソフトドリンクなど充実のドリンクラインナップ。</p>
-              <span class="menu-price">¥[要確認]〜</span>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>食べ放題コース</h3>
-              <p>カレー・ナン・タンドール料理など全品食べ放題。宴会・女子会に最適。</p>
-              <span class="menu-price">¥[要確認]〜</span>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>貸切プラン</h3>
-              <p>宴会・女子会・パーティーに。人数・ご予算に合わせてご相談ください。</p>
-              <span class="menu-price">要相談</span>
-            </div>
-          </div>
-          <div class="menu-card">
-            <div class="menu-card-inner">
-              <h3>ラッシー・チャイ</h3>
-              <p>本場インドのヨーグルトドリンク・スパイスティー。料理との相性抜群。</p>
-              <span class="menu-price">¥[要確認]〜</span>
-            </div>
+          <div class="reserve-tags">
+            <span class="tag">全席禁煙</span>
+            <span class="tag">Wi-Fi完備</span>
+            <span class="tag">英語メニューあり</span>
+            <span class="tag">テイクアウト〜23時</span>
           </div>
         </div>
       </div>
-      <p class="menu-note">※ 掲載内容は目安です。実際のメニュー・価格は店舗にご確認ください。</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== REVIEW ========== -->
-  <section class="review-section section" id="review">
-    <div class="container">
-      <div class="section-label">REVIEW</div>
-      <h2 class="section-title">お客様の評価</h2>
-      <div class="review-grid">
-        <a href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html" target="_blank" rel="noopener" class="review-card">
-          <div class="review-platform">TripAdvisor</div>
-          <div class="review-score">4.0</div>
-          <div class="review-stars">★★★★☆</div>
-          <div class="review-link">口コミを見る →</div>
-        </a>
-        <div class="review-card review-card--center">
-          <div class="review-platform">TrustYou</div>
-          <div class="review-score">4.5</div>
-          <div class="review-stars">★★★★½</div>
-          <div class="review-badge">高評価</div>
-        </div>
-        <a href="https://tabelog.com/tokyo/A1328/A132804/13161874/" target="_blank" rel="noopener" class="review-card">
-          <div class="review-platform">食べログ</div>
-          <div class="review-score">3.09</div>
-          <div class="review-stars">★★★☆☆</div>
-          <div class="review-sub">23件のレビュー</div>
-          <div class="review-link">口コミを見る →</div>
-        </a>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- ========== ACCESS ========== -->
-  <section class="access-section section" id="access">
-    <div class="container">
-      <div class="section-label">ACCESS</div>
-      <h2 class="section-title">アクセス</h2>
-      <div class="access-layout">
-        <div class="access-map">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3237.9!2d139.46098!3d35.72239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018e7c0a0000001%3A0x0!2z5p2x5Lqs6YO95bCP5bmV5biC44Gf44GL44Gu5Y-j43-10!5e0!3m2!1sja!2sjp!4v1700000000000"
-            width="100%"
-            height="400"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="バワナ 地図">
-          </iframe>
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="wrap">
+      <div class="ft-grid">
+        <div class="ft-brand">
+          <span class="ft-logo-en">Bhawana</span>
+          <span class="ft-logo-ja">インド料理 バワナ</span>
+          <address>
+            〒187-0024 東京都小平市たかの台43-10<br>
+            TEL:&ensp;<a href="tel:042-312-1275">042-312-1275</a><br>
+            営業時間：10:30〜23:30（L.O. 23:00）<br>
+            定休日：不定休
+          </address>
         </div>
-        <div class="access-info">
-          <div class="info-row">
-            <div class="info-icon">📍</div>
-            <div>
-              <strong>住所</strong><br>
-              〒187-0024<br>東京都小平市たかの台43-10
-            </div>
+        <div>
+          <span class="ft-col-title">Reservation</span>
+          <div class="ft-links">
+            <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener noreferrer">ホットペッパーグルメ</a>
+            <a href="tel:042-312-1275">電話予約</a>
           </div>
-          <div class="info-row">
-            <div class="info-icon">🚉</div>
-            <div>
-              <strong>最寄駅</strong><br>
-              西武多摩湖線 鷹の台駅（徒歩圏内）<br>
-              小川駅 / 新小平駅
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">📞</div>
-            <div>
-              <strong>電話</strong><br>
-              <a href="tel:0423121275" class="tel-link">042-312-1275</a>
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">🕐</div>
-            <div>
-              <strong>営業時間</strong><br>
-              [要確認]
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">📅</div>
-            <div>
-              <strong>定休日</strong><br>
-              [要確認]
-            </div>
-          </div>
-          <div class="info-row">
-            <div class="info-icon">💳</div>
-            <div>
-              <strong>予算</strong><br>
-              ランチ ¥501〜¥1,000<br>
-              ディナー ¥1,001〜¥1,500
-            </div>
+        </div>
+        <div>
+          <span class="ft-col-title">Review Sites</span>
+          <div class="ft-links">
+            <a href="https://tabelog.com/tokyo/A1328/A132804/13161874/" target="_blank" rel="noopener noreferrer">食べログ</a>
+            <a href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html" target="_blank" rel="noopener noreferrer">TripAdvisor</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ========== RESERVE ========== -->
-  <section class="reserve-section section" id="reserve">
-    <div class="container">
-      <div class="section-label">RESERVE</div>
-      <h2 class="section-title">ご予約・お問い合わせ</h2>
-      <p class="reserve-desc">お席のご予約は、ホットペッパーグルメまたはお電話にて承っております。</p>
-      <div class="reserve-btns">
-        <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener" class="btn btn-primary btn-large">
-          <span class="btn-icon">📅</span>
-          ホットペッパーで予約
-        </a>
-        <a href="tel:0423121275" class="btn btn-outline btn-large">
-          <span class="btn-icon">📞</span>
-          電話で予約 042-312-1275
-        </a>
+      <div class="ft-bottom">
+        © 2025 インド料理 バワナ（Bhawana）All rights reserved.
       </div>
-      <p class="reserve-note">貸切・宴会・女子会のご相談もお気軽にどうぞ。</p>
-
-      <div class="contact-divider">
-        <span>または、フォームでお問い合わせ</span>
-      </div>
-
-      <form class="contact-form" id="contact-form" novalidate>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="contact-name">お名前 <span class="required">*</span></label>
-            <input type="text" id="contact-name" name="name" placeholder="山田 太郎" autocomplete="name">
-            <span class="form-error" id="err-name"></span>
-          </div>
-          <div class="form-group">
-            <label for="contact-email">メールアドレス <span class="required">*</span></label>
-            <input type="email" id="contact-email" name="email" placeholder="example@mail.com" autocomplete="email">
-            <span class="form-error" id="err-email"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="contact-message">メッセージ <span class="required">*</span></label>
-          <textarea id="contact-message" name="message" rows="5" placeholder="ご質問・ご要望をお気軽にどうぞ（10文字以上）"></textarea>
-          <span class="form-error" id="err-message"></span>
-        </div>
-        <div class="form-submit">
-          <button type="submit" class="btn btn-primary btn-large" id="contact-submit">
-            <span class="btn-text">送信する</span>
-            <span class="btn-loading" hidden>送信中…</span>
-          </button>
-        </div>
-        <div class="form-feedback" id="form-feedback" hidden></div>
-      </form>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-logo">
-        <span class="logo-en">Bhawana</span>
-        <span class="logo-ja">バワナ</span>
-      </div>
-      <div class="footer-info">
-        <p>〒187-0024 東京都小平市たかの台43-10</p>
-        <p><a href="tel:0423121275">TEL: 042-312-1275</a></p>
-      </div>
-      <div class="footer-links">
-        <a href="https://www.hotpepper.jp/strJ001215557/" target="_blank" rel="noopener">ホットペッパー</a>
-        <a href="https://tabelog.com/tokyo/A1328/A132804/13161874/" target="_blank" rel="noopener">食べログ</a>
-        <a href="https://www.tripadvisor.jp/Restaurant_Review-g1060909-d8757986-Reviews-Bhawana-Kodaira_Tokyo_Prefecture_Kanto.html" target="_blank" rel="noopener">TripAdvisor</a>
-        <a href="https://www.google.com/search?q=バワナ+クチコミ" target="_blank" rel="noopener">Google口コミ</a>
-      </div>
-      <p class="footer-copy">&copy; 2024 Bhawana. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    // sticky header
+    const hdr = document.getElementById('hdr');
+    addEventListener('scroll', () => hdr.classList.toggle('on', scrollY > 48), { passive: true });
+
+    // hero bg pan
+    const heroBg = document.getElementById('heroBg');
+    const tmp = new Image();
+    tmp.onload = () => heroBg.classList.add('ready');
+    tmp.src = 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1920&q=75';
+
+    // mobile drawer
+    const drawer = document.getElementById('drawer');
+    document.getElementById('burger').addEventListener('click', () => drawer.classList.add('open'));
+    document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+    function closeDrawer() { drawer.classList.remove('open'); }
+
+    // menu tabs
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+        btn.classList.add('on');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('on');
+      });
+    });
+
+    // scroll reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
 </body>
 </html>
